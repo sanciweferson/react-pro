@@ -1,37 +1,9 @@
-
-
-
 @import "tailwindcss";
 
-
-@import 'tailwindcss';
-
-/*
- * ESSENCIAL: Redefine o modificador 'dark:'
- * para ser aplicado quando a classe '.dark'
- * estiver presente no elemento <html> (ou em qualquer ancestral).
- */
+/* --- Custom dark variant --- */
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* Opcional: Aqui você adicionaria qualquer personalização de tema v4 com @theme */
-/*
-@theme {
-  // ... suas variáveis customizadas
-}
-*/
-
-
-
-
-
-
-
-
-
-
-
-@import "tailwindcss";
-
+/* --- Base variables --- */
 @layer base {
   :root {
     --bg: #ffffff;
@@ -40,15 +12,22 @@
     --hover: #0dd0f0;
     --active: #056e85;
     --backdrop: rgba(0, 0, 0, 0.4);
+    --cor: #eb123e;
+
+    /* Variável específica do menu */
+    --menu-bg: var(--primary);
   }
 
   :root[data-theme='dark'] {
     --bg: #121212;
-    --text: #f0f0f0;
+    --text: #fff;
     --primary: #08c0dd;
     --hover: #0dd0f0;
     --active: #00a5c0;
-    --backdrop: rgba(0, 0, 0, 0.6);
+    --backdrops: black;
+ --cor: #1cca09;
+    /* Dark mode menu background */
+    --menu-bg: var(--backdrops);
   }
 
   body {
@@ -70,7 +49,7 @@
   }
 }
 
-/* ---- animações ---- */
+/* ---- Menu / animações ---- */
 @keyframes slideFadeIn {
   from { transform: translateX(-120%); opacity: 0; }
   to { transform: translateX(0); opacity: 1; }
@@ -98,4 +77,10 @@
   animation: fadeIn 0.3s forwards;
 }
 
+/* ---- Extras ---- */
+.transition-bg {
+  transition: background-color 0.5s ease-in-out;
+}
 
+/* Definindo a variante escura para o atributo data-theme */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
