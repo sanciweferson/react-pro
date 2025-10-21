@@ -17,7 +17,7 @@ import useTheme from "../hooks/useTheme"
 import useMenu from "../hooks/useMenu"
 import useScrollPosition from "../hooks/useScrollPosition" // 👈 novo hook
 import NavLinkItem from "../config/navLinks"
-import Text from "./text"
+
 
 export default function Navbar() {
   const { theme, toggleTheme } = useTheme()
@@ -32,6 +32,18 @@ export default function Navbar() {
     { name: "Details", path: "/details", icon: <Info size={20} /> },
     { name: "Download", path: "/download", icon: <Download size={20} /> },
     { name: "Contato", path: "/contato", icon: <Mail size={20} /> },
+    { 
+    name: "Facebook", 
+    path: "https://www.facebook.com/seu-perfil", // link real do Facebook
+    icon: <Facebook size={20} />, 
+    external: true // flag pra identificar que é externo
+  },
+  { 
+    name: "Instagram", 
+    path: "https://www.instagram.com/sanciweferson?igsh=cHFyeHlmazVmdDFv", // link real do Instagram
+    icon: <Instagram size={20} />, 
+    external: true 
+  },
   
   ]
 
@@ -106,14 +118,12 @@ overflow-y-auto [&::-webkit-scrollbar]:hidden
 >
 
 
-   <div className="flex flex-col mt-6 gap-3 w-full md:flex-row md:mt-0 md:gap-24 md:flex-1 md:justify-center">
+   <div className="flex flex-col mt-6 gap-3 w-full md:flex-row md:mt-0 md:gap-14 md:flex-1 md:justify-center">
             {links.map((link, i) => (
               <NavLinkItem key={`${link.name}-${i}`} link={link} index={i} onClick={() => setOpen(false)} />
             ))}
           </div>
-  <div className="md:hidden">
-  <Text  />
-  </div>
+
 
 
   {/* Botão de tema */}
