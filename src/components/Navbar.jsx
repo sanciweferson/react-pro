@@ -17,6 +17,7 @@ import useTheme from "../hooks/useTheme"
 import useMenu from "../hooks/useMenu"
 import useScrollPosition from "../hooks/useScrollPosition" // 👈 novo hook
 import NavLinkItem from "../config/navLinks"
+import Text from "./text"
 
 export default function Navbar() {
   const { theme, toggleTheme } = useTheme()
@@ -31,9 +32,9 @@ export default function Navbar() {
     { name: "Details", path: "/details", icon: <Info size={20} /> },
     { name: "Download", path: "/download", icon: <Download size={20} /> },
     { name: "Contato", path: "/contato", icon: <Mail size={20} /> },
-    { name: "Facebook", path: "/facebook", icon: <Facebook size={20} /> },
-    { name: "Instagram", path: "/instagram", icon: <Instagram size={20} /> },
+  
   ]
+
 
   // Animação rápida ao atualizar com menu aberto
   useEffect(() => {
@@ -48,10 +49,12 @@ export default function Navbar() {
     }
   }, [])
 
-  // Define cor do texto com base no scroll
-  const textColor = scrolled ? "text-white" : "text-[var(--text)]"
+  // Cores do navbar
+  const textColor = scrolled ? "text-blue-500" : "text-[var(--text)]"
   const hoverColor = scrolled ? "hover:text-gray-300" : "hover:text-[var(--hover)]"
-
+  const themeButtonHover = scrolled
+    ? "bg-gray-700 hover:bg-gray-600"
+    : "hover:bg-[var(--muted)]"
   return (
     <div>
       {/* Backdrop */}
@@ -62,9 +65,9 @@ export default function Navbar() {
         }`}
       />
 
-      <nav
+      <nav scrollbar-thin
         ref={navRef}
-        className={` fixed top-0 left-0 right-0 z-[200] flex items-center justify-between py-3 px-4 transition-all duration-500 backdrop-blur-md ${
+        className={` py-6 fixed   top-0 left-0 right-0 z-[200] flex items-center justify-between py-3 px-4 transition-all duration-500 backdrop-blur-md ${
           scrolled
             ? "bg-[rgba(0,31,63,0.85)] w-full shadow-lg"
             : "bg-transparent max-w-[1200px] mx-auto "
@@ -85,41 +88,47 @@ export default function Navbar() {
         </button>
 
         {/* Menu */}
-    <div
-  className={`
-    
-    flex flex-col md:flex-row items-start md:items-center gap-6 fixed md:static top-0 left-0
-    w-[85%] md:w-auto h-screen md:h-auto md:bg-transparent p-8 md:p-0
+   <div
+  className={` 
+    border-r-[4px] border-[var(--border)]
+    bg-[var(--sidebar-primary)]
+    md:border-transparent
+    flex flex-col md:flex-row items-start md:items-center gap-6
+    fixed md:static top-0 left-0
+    w-[80%] md:w-auto h-screen md:h-auto md:bg-transparent p-8 md:p-0
     rounded-r-xl md:rounded-none shadow-lg md:shadow-none
     transition-transform duration-400 ease-out z-[200]
     ${open || animateOnLoad ? "translate-x-0" : "-translate-x-[120%] md:translate-x-0"}
-    md:flex-1 md:justify-end overflow-y-hidden
-    bg-[var(--menu-bg)] transition-bg
+    md:flex-1 md:justify-end
+
+overflow-y-auto [&::-webkit-scrollbar]:hidden
   `}
 >
 
-          {/* Links */}
-          <div className="flex flex-col md:flex-row items-start md:items-center gap-6 md:flex-1 md:justify-center">
+
+   <div className="flex flex-col mt-6 gap-3 w-full md:flex-row md:mt-0 md:gap-24 md:flex-1 md:justify-center">
             {links.map((link, i) => (
-              <NavLinkItem
-                key={link.name}
-                link={link}
-                index={i}
-                onClick={() => setOpen(false)}
-                textColor={textColor}
-                hoverColor={hoverColor}
-              />
+              <NavLinkItem key={`${link.name}-${i}`} link={link} index={i} onClick={() => setOpen(false)} />
             ))}
           </div>
+  <div className="md:hidden">
+  <Text  />
+  </div>
 
-          {/* Botão de tema */}
-          <button
-            onClick={toggleTheme}
-            className={`absolute md:static top-6 right-6 md:top-0 md:right-0 ${textColor} ${hoverColor} transition-colors duration-300`}
-          >
-            {theme === "dark" ? <Sun size={22} /> : <Moon size={22} />}
-          </button>
-        </div>
+
+  {/* Botão de tema */}
+  <button
+    onClick={toggleTheme}
+    className={`  flex items-center justify-center
+      w-10 h-10 rounded-full border border-[var(--border)]
+      bg-[var(--background)] hover:bg-[var(--muted)]
+       absolute md:static top-2 right-2 md:top-0 md:right-0   ${themeButtonHover} transition-colors duration-300`}
+  >
+    {theme === "dark" ? <Sun size={22} /> : <Moon size={22} />}
+  </button>
+</div>
+
+     
       </nav>
     </div>
   )

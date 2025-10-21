@@ -10,6 +10,7 @@ export default function Header() {
 >
   <div className="h-full flex justify-center items-center">
     <Navbar />
+  
   </div>
 </header>
 

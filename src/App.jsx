@@ -11,7 +11,8 @@ export default function App() {
   return (
 <>
       <Header />
-      <main className="pt-20 min-h-screen bg-[var(--bg)] text-[var(--text)] transition-colors duration-300">
+      <main className="mt-22 px-4 max-w-[1200px] m-auto min-h-screen  text-[var(--text)] md:mt-30 transition-colors
+       duration-300">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/features" element={<Features />} />

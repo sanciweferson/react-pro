@@ -28,7 +28,7 @@ export default function ScrollToTopButton() {
     <button
       onClick={scrollToTop}
       aria-label="Voltar ao topo"
-      className={`fixed bottom-6 right-6 z-[300] bg-[var(--hover)] text-white p-3 rounded-full shadow-lg transition-all duration-300 hover:bg-[var(--active)] hover:scale-105 ${
+      className={`fixed bottom-6 right-6 z-[00] bg-[var(--hover)] text-white p-3 rounded-full shadow-lg transition-all duration-300 hover:bg-[var(--active)] hover:scale-105 ${
         visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10 pointer-events-none"
       }`}
     >

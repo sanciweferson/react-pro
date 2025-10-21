@@ -1,86 +1,85 @@
 @import "tailwindcss";
 
-/* --- Custom dark variant --- */
-@custom-variant dark (&:where(.dark, .dark *));
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
-/* --- Base variables --- */
-@layer base {
-  :root {
-    --bg: #ffffff;
-    --text: #1a1a1a;
-    --primary: #08c0dd;
-    --hover: #0dd0f0;
-    --active: #056e85;
-    --backdrop: rgba(0, 0, 0, 0.4);
-    --cor: #eb123e;
 
-    /* Variável específica do menu */
-    --menu-bg: var(--primary);
-  }
 
-  :root[data-theme='dark'] {
-    --bg: #121212;
-    --text: #fff;
-    --primary: #08c0dd;
-    --hover: #0dd0f0;
-    --active: #00a5c0;
-    --backdrops: black;
- --cor: #1cca09;
-    /* Dark mode menu background */
-    --menu-bg: var(--backdrops);
-  }
-
-  body {
-    @apply transition-colors duration-400 ease-in-out;
-    background-color: var(--bg);
-    color: var(--text);
-    font-family: 'Inter', sans-serif;
-  }
-
-  a {
-    @apply no-underline;
-    color: inherit;
-  }
-
-  button {
-    @apply bg-transparent border-none cursor-pointer;
-    color: var(--text);
-    font: inherit;
-  }
+/* Estilos base */
+html, body {
+  @apply transition-colors duration-300 ease-in-out;
+  background-color: var(--background);
+  color: var(--foreground);
+   font-family: "Roboto", sans-serif;
+   
 }
 
-/* ---- Menu / animações ---- */
-@keyframes slideFadeIn {
-  from { transform: translateX(-120%); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
+/* Variáveis globais */
+:root {
+  --radius: 0.65rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(14.751% 0.00458 128.61);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.141 0.005 285.823);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.141 0.005 285.823);
+  --primary: oklch(0.488 0.243 264.376);
+  --primary-foreground: oklch(0.97 0.014 254.604);
+  --secondary: oklch(0.967 0.001 286.375);
+  --secondary-foreground: oklch(0.21 0.006 285.885);
+  --muted: oklch(0.967 0.001 286.375);
+  --muted-foreground: oklch(57.558% 0.0161 128.922);
+  --accent: oklch(0.967 0.001 286.375);
+  --accent-foreground: oklch(0.21 0.006 285.885);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.92 0.004 286.32);
+  --input: oklch(0.92 0.004 286.32);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.809 0.105 251.813);
+  --chart-2: oklch(0.623 0.214 259.815);
+  --chart-3: oklch(0.546 0.245 262.881);
+  --chart-4: oklch(0.488 0.243 264.376);
+  --chart-5: oklch(0.424 0.199 265.638);
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.141 0.005 285.823);
+  --sidebar-primary: oklch(0.546 0.245 262.881);
+  --sidebar-primary-foreground: oklch(0.97 0.014 254.604);
+  --sidebar-accent: oklch(0.967 0.001 286.375);
+  --sidebar-accent-foreground: oklch(0.21 0.006 285.885);
+  --sidebar-border: oklch(0.92 0.004 286.32);
+  --sidebar-ring: oklch(0.708 0 0);
 }
 
-@keyframes slideFadeOut {
-  from { transform: translateX(0); opacity: 1; }
-  to { transform: translateX(-120%); opacity: 0; }
+/* Variáveis para dark mode */
+.dark {
+  --background: oklch(0.141 0.005 285.823);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.21 0.006 285.885);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.21 0.006 285.885);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.488 0.243 264.376);
+  --primary-foreground: oklch(0.97 0.014 254.604);
+  --secondary: oklch(0.274 0.006 286.033);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.274 0.006 286.033);
+  --muted-foreground: oklch(0.705 0.015 286.067);
+  --accent: oklch(0.274 0.006 286.033);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.809 0.105 251.813);
+  --chart-2: oklch(0.623 0.214 259.815);
+  --chart-3: oklch(0.546 0.245 262.881);
+  --chart-4: oklch(0.488 0.243 264.376);
+  --chart-5: oklch(0.424 0.199 265.638);
+  --sidebar: oklch(0.21 0.006 285.885);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.623 0.214 259.815);
+  --sidebar-primary-foreground: oklch(0.97 0.014 254.604);
+  --sidebar-accent: oklch(0.274 0.006 286.033);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.439 0 0);
 }
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-5px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.animate-slideFadeIn {
-  animation: slideFadeIn 0.4s forwards;
-}
-
-.animate-slideFadeOut {
-  animation: slideFadeOut 0.4s forwards;
-}
-
-.animate-fadeIn {
-  animation: fadeIn 0.3s forwards;
-}
-
-/* ---- Extras ---- */
-.transition-bg {
-  transition: background-color 0.5s ease-in-out;
-}
-
-/* Definindo a variante escura para o atributo data-theme */
-@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));

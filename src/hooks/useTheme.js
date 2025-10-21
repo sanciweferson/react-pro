@@ -2,8 +2,11 @@ import { useState, useEffect } from "react"
 
 export default function useTheme() {
   const [theme, setTheme] = useState(() => {
+    // Tenta carregar o tema salvo manualmente
     const stored = localStorage.getItem("theme")
     if (stored) return stored
+
+    // Se não tiver salvo, segue a preferência do sistema
     return window.matchMedia("(prefers-color-scheme: dark)").matches
       ? "dark"
       : "light"
@@ -13,11 +16,20 @@ export default function useTheme() {
     () => !!localStorage.getItem("theme")
   )
 
+  // Aplica a classe 'dark' no <html> e salva se for manual
   useEffect(() => {
-    document.documentElement.dataset.theme = theme
-    if (manualTheme) localStorage.setItem("theme", theme)
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark")
+    } else {
+      document.documentElement.classList.remove("dark")
+    }
+
+    if (manualTheme) {
+      localStorage.setItem("theme", theme)
+    }
   }, [theme, manualTheme])
 
+  // Atualiza automaticamente se o sistema mudar o tema
   useEffect(() => {
     const mq = window.matchMedia("(prefers-color-scheme: dark)")
     const handler = (e) => {
@@ -27,6 +39,7 @@ export default function useTheme() {
     return () => mq.removeEventListener("change", handler)
   }, [manualTheme])
 
+  // Alterna entre claro/escuro manualmente
   const toggleTheme = () => {
     setTheme((prev) => {
       const next = prev === "dark" ? "light" : "dark"
