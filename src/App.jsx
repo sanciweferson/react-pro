@@ -6,6 +6,9 @@ import Home from "./pages/Home"
 import Contact from "./pages/Contact"
 import Footer from "./components/layout/Footer"
 import Features from "./pages/Features"
+import About from "./pages/About"
+import Details from "./pages/Details"
+import Download from "./pages/Download"
 
 export default function App() {
   return (
@@ -16,6 +19,9 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/features" element={<Features />} />
+           <Route path="/about" element={<About />} />
+           <Route path="/details" element={<Details />} />
+           <Route path="/download" element={<Download />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </main>

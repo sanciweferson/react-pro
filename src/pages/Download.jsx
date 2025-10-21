@@ -3,7 +3,7 @@ import React from "react"
 import { Loader2, Hammer, Settings, Home } from "lucide-react"
 import { useNavigate } from "react-router-dom"
 
-export default function Contact() {
+export default function Download() {
   const navigate = useNavigate()
 
   return (
